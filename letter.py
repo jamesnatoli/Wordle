@@ -1,18 +1,21 @@
 # Class to hold information about individual letters
 # James Natoli, 2022
 
-class letter:
+from termcolor import colored
+from colorMap import colorMap
+
+class Letter:
     def __init__(self):
         """Initialize to nothing"""
         text = ''
-        color = ''
+        color = 'on_grey'
         position = 0
 
-    def __init__(self, t1, p1, c1='red'):
+    def __init__(self, txt, pos, col='on_red'):
         """Alternate initialization"""
-        self.text = t1
-        self.position = p1
-        self.color = c1
+        self.text = txt
+        self.position = pos
+        self.color = col
         
     def getPos( self):
         """Get the letters position"""
@@ -26,10 +29,11 @@ class letter:
         """Get the letters color"""
         return self.color
 
-    def setColor( self, newcol):
+    def setColor( self, newColID):
         """Set the letters color"""
-        self.color = newcol
+        self.color = colorMap[newColID]
+
     
-    def print( self):
-        """Hmm..."""
-        getText( self)
+    def __str__( self):
+        """Return the 'colored' object for this letter"""
+        return colored(' %s ', 'white', '%s'%( self.text, self.color))
