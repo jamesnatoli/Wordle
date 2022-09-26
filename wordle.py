@@ -14,7 +14,8 @@ file_name = '/Users/jamesnatoli/Documents/Programs/Wordle/FiveLetterWords.txt'
 def getWords( num=6):
     with open(file_name, 'r') as fi:
         return list( map( str.rstrip, list( filter( lambda w: (len(w) == num), fi))))
-
+    
+# Obselete
 def check( guess, answer):
     # guess is a list of letter objects
     assert len( guess) == len(answer), 'WORDLE NOT HAPPY'
