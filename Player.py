@@ -25,6 +25,8 @@ class Player:
         """Start the game"""
         for turn in range(1, 6):
             inguess = input('Guess %d/6: \t'%(turn))
+            for i in range( 0, 5):
+                self.guess[i].setText( inguess[i])
             self.incorporateFeedback( self.currentGame.nextGuess( inguess))
 
     def incorporateFeedback( self, feedback):
@@ -34,11 +36,7 @@ class Player:
         self.printGuess()
 
     def printGuess( self):
-        coloredText = colored('')
-        text = ''
-        for el in self.guess:
-            coloredText = text + colored( self.padText( el.getText()), 'white', el.getColor())
-        return coloredText
+        print( ''.join( [str(el) for el in self.guess]))
                                 
     def padText( self, someText):
         return ' ' + someText + ''

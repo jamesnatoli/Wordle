@@ -7,11 +7,11 @@ from colorMap import colorMap
 class Letter:
     def __init__(self):
         """Initialize to nothing"""
-        text = ''
-        color = 'on_grey'
-        position = 0
+        self.text = ''
+        self.color = 'on_grey'
+        self.position = 0
 
-    def __init__(self, txt, pos, col='on_red'):
+    def __init__(self, txt, pos, col='on_grey'):
         """Alternate initialization"""
         self.text = txt
         self.position = pos
@@ -29,11 +29,18 @@ class Letter:
         """Get the letters color"""
         return self.color
 
+    def setText( self, newText):
+        """Set the letters text"""
+        self.text = newText.capitalize()
+    
     def setColor( self, newColID):
         """Set the letters color"""
         self.color = colorMap[newColID]
-
     
     def __str__( self):
         """Return the 'colored' object for this letter"""
-        return colored(' %s ', 'white', '%s'%( self.text, self.color))
+        return colored(' %s '%( self.text), 'white', '%s'%(self.color))
+
+    def __repr__(self):
+        """Return string representation"""
+        return self.__str__()
