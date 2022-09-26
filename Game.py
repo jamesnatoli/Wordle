@@ -29,12 +29,13 @@ class Game:
         """Initialize object, get the solution"""
         self.solLength = num
         # Get solution
-        self.solution = self.getWords()
+        self.allWords = []
         self.guess = ""
         self.remainingGuesses = 6
-        self.allWords = []
         self.duplicates = {}
-        
+        self.solution = self.getWords()
+
+        # Remember to delete this
         print( self.solution)
 
     def getWords( self):
@@ -51,11 +52,11 @@ class Game:
                 self.allWords = list( map( str.rstrip, fi.readlines()))
                 return np.random.choice( self.allWords)
         
-    def nextGuess( self, guess):
-        """Receive the guess as string, unpack and save it"""
-        assert len( guess) == len( self.solution), 'Please input a word of correct length...'
-        assert self.isValid(), 'Please input a valid word...'
-        self.guess = guess
+    def nextGuess( self, inGuess):
+        """Receive the guess as string, return feedback on it"""
+        assert len( inGuess) == len( self.solution), 'Please input a word of correct length...'
+        assert self.isValid( inGuess), 'Please input a valid word...'
+        self.guess = inGuess
         if self.isSolution():
             return [ 2, 2, 2, 2, 2]
         else:
@@ -64,7 +65,7 @@ class Game:
                 exit(0)
                 return self.checkDupSolution()
             else:
-                return self.checkSoluton()
+                return self.checkSolution()
 
     def isSolution( self):
         """Checks if guess is exactly equal to solution"""
@@ -117,7 +118,6 @@ class Game:
                 if dupLetter == el:
                     self.duplicates[dupLetter].append( idx)
 
-
     # Consider cases...
     # 1) duplicate set in guess, soln has none
     # - provide the "best" info
@@ -158,9 +158,9 @@ class Game:
                         feedback[index] = 1
                         infoGiven[el] = True
 
-    def isValid( self):
+    def isValid( self, inGuess):
         """Checks if the guess is a valid word"""
-        return self.guess in self.allWords
+        return inGuess in self.allWords
 
     def resetGame( self):
         """Set everything to beginning, get a new word"""
