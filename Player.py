@@ -12,31 +12,38 @@ from Letter import Letter
 from Game import Game
 
 class Player:
-    def __init__( self):
+    def __init__( self, wordLength):
         """Initialize object"""
-        self.currentGame = Game()
         self.isSolved = False
+        self.wLength = wordLength
+        self.solvedArray = [2] * wordLength
+        self.currentGame = Game( self.wLength)
 
-        # array of Letter objects
+        # will be array of Letter objects
         self.guess = []
-        for i in range( 0, 5):
+        for i in range( 0, self.wLength):
             self.guess.append( Letter( '', i))
 
     def runGame( self):
-        """Start the game"""
-        for turn in range(1, 6):
-            if self.isSolved:
-                print("Great work!! :)")
-                break
+        """Start the game and proceed through guesses"""
+        print('Welcome to ' + colored(' W ', 'white', 'on_grey') + colored(' O ', 'white', 'on_yellow') + colored(' R ', 'white', 'on_green') +
+           colored(' D ', 'white', 'on_grey') + colored(' L ', 'white', 'on_yellow') + colored(' E ', 'white', 'on_green'))
+        for turn in range(1, 6): # keep guesses at 6?
             inGuess = input('Guess %d/6: \t'%(turn))
-            assert len( inGuess) == 5, 'Please input a word of correct length...'
-            for i in range( 0, 5):
+            while not self.currentGame.isValid( inGuess) or not len( inGuess) == self.wLength:
+                print( "Please input a valid word...")
+                inGuess = input('Guess %d/6: \t'%(turn))
+            for i in range( 0, self.wLength):
                 self.guess[i].setText( inGuess[i])
             self.incorporateFeedback( self.currentGame.nextGuess( inGuess))
+            if self.isSolved:
+                print("Great work!! :)")
+                print("You solved Wordle in %d guesses"%(turn))
+                break                
 
     def incorporateFeedback( self, feedback):
         """Update the 'guess' array with the Game feedback"""
-        if feedback == [ 2, 2, 2, 2, 2]:
+        if feedback == self.solvedArray:
             self.isSolved = True
         for i in range( 0, len(feedback)):
             self.guess[i].setColor( feedback[i])
