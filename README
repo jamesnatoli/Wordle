@@ -1,7 +1,11 @@
 This is a repository for my version of the NYT game Wordle
 
-To play, run **python test.py**
+This is designed for python 3 
+To play, run
+>> python test.py
 
-To use different length words, use **python test.py -l 8** for example
+To use different length words, use the -l or the --wordlength option
+>> python test.py -l 8
 
-You will need to have **termcolor** installed, which can be done via **pip install termcolor**
+You will need to have termcolor installed, which can be done via
+>>pip install termcolor
