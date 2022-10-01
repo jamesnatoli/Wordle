@@ -34,6 +34,9 @@ def main():
 if __name__ == "__main__":
     try:
         main()
+    except KeyboardInterrupt as kExcept:
+        print( kExcept)
+        print("\n Thanks for playing!")
     except Exception as e:
         print( e)
         print("\n\nBye Bye!")
