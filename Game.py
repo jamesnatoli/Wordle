@@ -25,7 +25,7 @@ class Game:
         self.solution = self.getWords()
 
         # Remember to delete this
-        print( self.solution)
+        # print( self.solution)
 
     def getWords( self):
         """Save all the possible words as a member list"""
