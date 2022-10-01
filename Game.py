@@ -12,8 +12,8 @@ import sys
 import random
 import numpy as np
 
-five_file_name = '/Users/jamesnatoli/Documents/Programs/Wordle/FiveLetterWords.txt'
-allWords_file_name = '/Users/jamesnatoli/Documents/Programs/Wordle/AllWords.txt'
+five_file_name = 'FiveLetterWords.txt'
+allWords_file_name = 'AllWords.txt'
 
 class Game:
     def __init__( self, num=5):
