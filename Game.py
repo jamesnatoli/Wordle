@@ -54,15 +54,14 @@ class Game:
         
     def nextGuess( self, inGuess):
         """Receive the guess as string, return feedback on it"""
-        assert len( inGuess) == len( self.solution), 'Please input a word of correct length...'
         assert self.isValid( inGuess), 'Please input a valid word...'
         self.guess = inGuess
         if self.isSolution():
             return [ 2, 2, 2, 2, 2]
         else:
             if self.guessDuplicates() and not self.solutionDuplicates():
-                print ("no duplicates please, not working yet...")
-                exit(0)
+                # print ("no duplicates please, not working yet...")
+                # exit(0)
                 return self.checkDupSolution()
             else:
                 return self.checkSolution()
@@ -90,7 +89,7 @@ class Game:
         """Duplicates in solution"""
         checked = []
         dupFlag = False
-        for el in self.guess:
+        for el in self.solution:
             if el in checked:
                 dupFlag = True
                 checked.append( el)
@@ -130,6 +129,7 @@ class Game:
     def checkDupSolution( self):
         """Provides feedback about letters in the event the guess has duplicates, but soln does not"""
         # start with a dictionary of the duplicate letters mapped to their locations
+        # consider changing the letter in guess to like '?' or something, this will let you know that it's already been fed back info
         self.dupIndex()
         checked = []
         count = 0
@@ -157,6 +157,8 @@ class Game:
                     if el in self.solution:
                         feedback[index] = 1
                         infoGiven[el] = True
+
+        return feedback
 
     def isValid( self, inGuess):
         """Checks if the guess is a valid word"""
