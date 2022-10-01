@@ -61,6 +61,9 @@ class Game:
                 tempSol[ tempSol.index(el)] = '*'
 
         return feedback
+
+    def getSolution( self):
+        return self.solution
     
     def isValid( self, inGuess):
         """Checks if the guess is a valid word"""
