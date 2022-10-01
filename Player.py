@@ -28,7 +28,7 @@ class Player:
         """Start the game and proceed through guesses"""
         print('Welcome to ' + colored(' W ', 'white', 'on_grey') + colored(' O ', 'white', 'on_yellow') + colored(' R ', 'white', 'on_green') +
            colored(' D ', 'white', 'on_grey') + colored(' L ', 'white', 'on_yellow') + colored(' E ', 'white', 'on_green'))
-        for turn in range(1, 6): # keep guesses at 6?
+        for turn in range(1, 7): # keep guesses at 6?
             inGuess = input('Guess %d/6: \t'%(turn))
             while not self.currentGame.isValid( inGuess) or not len( inGuess) == self.wLength:
                 print( "Please input a valid word...")
@@ -39,7 +39,9 @@ class Player:
             if self.isSolved:
                 print("Great work!! :)")
                 print("You solved Wordle in %d guesses"%(turn))
-                break                
+                break
+
+        print("Better luck next time... the word was %s"%(self.currentGame.getSolution()))
 
     def incorporateFeedback( self, feedback):
         """Update the 'guess' array with the Game feedback"""
